@@ -1,0 +1,15 @@
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.exe
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.deps.json
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.runtimeconfig.json
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.runtimeconfig.dev.json
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.dll
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\APITesting.pdb
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.csprojAssemblyReference.cache
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.AssemblyInfoInputs.cache
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.AssemblyInfo.cs
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.dll
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.pdb
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.genruntimeconfig.cache
+C:\Users\L3GZ\source\repos\APITesting\APITesting\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.csproj.CoreCompileInputs.cache
+C:\Users\L3GZ\source\repos\APITesting\APITesting\obj\Debug\netcoreapp3.1\APITesting.csproj.CopyComplete
