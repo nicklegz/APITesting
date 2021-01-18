@@ -9,26 +9,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 using System.Configuration;
-
 namespace APITesting
 {
     class Program
     {
         static readonly HttpClient client = new HttpClient();
+        static readonly Helpers helpers = new Helpers();
         static async Task Main()
         {
-            //read.txt file containing the JSON text
-            //var rawJSON = File.ReadAllText(@"C:\Users\L3GZ\source\repos\APITesting\APITesting\Test Files\JSONResponse.txt");
-
-            //extract JSONElement based on the Stock Data class
-            //var deserial = JsonSerializer.Deserialize<StockData>(rawJSON);
-
-            ////query JSONElement for exchange equal to Germany
-            //var query = from item in deserial.Quote.EnumerateArray()
-            //            where item.GetProperty("exchange").ToString() == "GER"
-            //            select item;
-
-
             string apiHost = ConfigurationManager.AppSettings["apihost"];
             string apiKey = ConfigurationManager.AppSettings["apiKey"];
             string baseUrl = ConfigurationManager.AppSettings["baseurl"];
@@ -36,11 +24,10 @@ namespace APITesting
 
             string pathParam = String.Format("stock/{0}/book", symbol);
 
+            //can add query parameters as needed
             List<string> filter = new List<string>() /*{ "q=microsoft", "region=US" }*/;
 
-            string uri = UriHelper(baseUrl, filter, pathParam);
-            //Console.WriteLine(newUri);
-            //Console.ReadLine();
+            string uri = helpers.UriHelper(baseUrl, filter, pathParam);
 
             var request = new HttpRequestMessage
             {
@@ -61,38 +48,17 @@ namespace APITesting
                 body = await response.Content.ReadAsStringAsync();
             }
 
-            var convertJson = JsonSerializer.Deserialize<StockData>(body);
+            
+            string dateTime = DateTime.Now.ToString().Replace(":", "-").Replace("/","-");
+            string fileName = String.Format(@"S:\Test\{0} - Stock - {1}.txt", dateTime, symbol.ToUpper());
+
+            string formattedJson = helpers.FormatJson(body);
+
+            await File.WriteAllTextAsync(fileName, formattedJson);
+
         }
 
-
-            static string UriHelper(string fragment, List<string> filters, string path)
-            {
-                UriBuilder uri = new UriBuilder(fragment);
-                uri.Path = path;
-                uri.Port = -1;
-
-                string concatQuery = "";
-
-                //build query substring based on List
-                if (filters.Count > 0)
-                {
-                    foreach (string filter in filters)
-                    {
-                        if (concatQuery == "")
-                        {
-                            concatQuery = filter;
-                        }
-                        else
-                        {
-                            concatQuery = concatQuery + '&' + filter;
-                        }
-                    }
-
-                    uri.Query = concatQuery;
-                }
-
-                return uri.ToString();
-        }
+        
     }
 }
 

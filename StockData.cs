@@ -8,8 +8,7 @@ namespace APITesting
 {
     public class StockData
     {
-        [JsonPropertyName("quotes")]
-        public JsonElement Quotes { get; set; }
-
+        [JsonPropertyName("quote")]
+        public JsonElement Quote { get; set; }
     }
 }
