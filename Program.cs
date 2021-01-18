@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
+using System.Configuration;
 
 namespace APITesting
 {
@@ -16,73 +17,83 @@ namespace APITesting
         static readonly HttpClient client = new HttpClient();
         static async Task Main()
         {
-            //read .txt file containing the JSON text
-            var rawJSON = File.ReadAllText(@"C:\Users\L3GZ\source\repos\APITesting\APITesting\Test Files\JSONResponse.txt");
+            //read.txt file containing the JSON text
+            //var rawJSON = File.ReadAllText(@"C:\Users\L3GZ\source\repos\APITesting\APITesting\Test Files\JSONResponse.txt");
 
             //extract JSONElement based on the Stock Data class
-            var deserial = JsonSerializer.Deserialize<StockData>(rawJSON);
+            //var deserial = JsonSerializer.Deserialize<StockData>(rawJSON);
 
-            //query JSONElement for exchange equal to Germany
-            var query = from item in deserial.Quotes.EnumerateArray()
-                        where item.GetProperty("exchange").ToString() == "GER"
-                        select item;
-
-            foreach(var result in query)
-            {
-                Console.WriteLine(result);
-            }
+            ////query JSONElement for exchange equal to Germany
+            //var query = from item in deserial.Quote.EnumerateArray()
+            //            where item.GetProperty("exchange").ToString() == "GER"
+            //            select item;
 
 
-            /*
-            string baseUri = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete";
-            List<string> filter = new List<string>() { "q=microsoft", "region=US" };
+            string apiHost = ConfigurationManager.AppSettings["apihost"];
+            string apiKey = ConfigurationManager.AppSettings["apiKey"];
+            string baseUrl = ConfigurationManager.AppSettings["baseurl"];
+            string symbol = ConfigurationManager.AppSettings["stocksymbol"];
 
-            string newUri = UriHelper(baseUri, filter);
+            string pathParam = String.Format("stock/{0}/book", symbol);
+
+            List<string> filter = new List<string>() /*{ "q=microsoft", "region=US" }*/;
+
+            string uri = UriHelper(baseUrl, filter, pathParam);
             //Console.WriteLine(newUri);
             //Console.ReadLine();
 
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(newUri),
-                Headers = {
-                    { "x-rapidapi-key", "9b10f8dd27mshf3a33f7fe54e3bcp11bf99jsnd93d02395254" },
-                    { "x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com" }}
+                RequestUri = new Uri(uri),
+                Headers =
+            {
+                { "x-rapidapi-key", apiKey},
+                { "x-rapidapi-host", apiHost}
+            }
             };
+
+            string body = "";
 
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
+                body = await response.Content.ReadAsStringAsync();
             }
-            */
-        }
-        static string UriHelper(string fragment, List<string> filters)
-        {
-            UriBuilder uri = new UriBuilder(fragment);
 
-            string concatQuery = "";
-            
-            //build query substring based on List
-            if(filters.Count > 0)
+            var convertJson = JsonSerializer.Deserialize<StockData>(body);
+        }
+
+
+            static string UriHelper(string fragment, List<string> filters, string path)
             {
-                foreach(string filter in filters)
+                UriBuilder uri = new UriBuilder(fragment);
+                uri.Path = path;
+                uri.Port = -1;
+
+                string concatQuery = "";
+
+                //build query substring based on List
+                if (filters.Count > 0)
                 {
-                    if(concatQuery == "")
+                    foreach (string filter in filters)
                     {
-                        concatQuery = filter;
+                        if (concatQuery == "")
+                        {
+                            concatQuery = filter;
+                        }
+                        else
+                        {
+                            concatQuery = concatQuery + '&' + filter;
+                        }
                     }
-                    else
-                    {
-                        concatQuery = concatQuery + '&' + filter;
-                    }
+
+                    uri.Query = concatQuery;
                 }
 
-                uri.Query = concatQuery;
-            }
-
-            return uri.ToString();
+                return uri.ToString();
         }
     }
 }
+
+
