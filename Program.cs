@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 using System.Configuration;
-using TechnicalAnalysisApp_Api;
 
 namespace APITesting
 {
@@ -50,10 +49,15 @@ namespace APITesting
                 body = await response.Content.ReadAsStringAsync();
             }
 
+            var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
 
-            var jsonReponse = helpers.FormatJson(body).Symbol;
+            var result = JsonSerializer.Deserialize<JsonRootResponse>(body);
 
-            Console.WriteLine("Symbol: " + jsonReponse);
+            
+            Console.WriteLine("Symbol: " + result.Quote.Date);
             Console.ReadLine();
 
 

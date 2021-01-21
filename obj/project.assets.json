@@ -513,23 +513,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\L3GZ\\.nuget\\packages\\": {},
+    "C:\\Users\\Nick\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\TechnicalAnalysisApp_Api.csproj",
+      "projectUniqueName": "C:\\Users\\Nick\\source\\repos\\APITesting\\TechnicalAnalysisApp_Api.csproj",
       "projectName": "TechnicalAnalysisApp_Api",
-      "projectPath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\TechnicalAnalysisApp_Api.csproj",
-      "packagesPath": "C:\\Users\\L3GZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\obj\\",
+      "projectPath": "C:\\Users\\Nick\\source\\repos\\APITesting\\TechnicalAnalysisApp_Api.csproj",
+      "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nick\\source\\repos\\APITesting\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\L3GZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -542,6 +542,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -553,6 +554,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Newtonsoft.Json": {
             "target": "Package",
@@ -578,7 +580,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
