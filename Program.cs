@@ -9,6 +9,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 using System.Configuration;
+using TechnicalAnalysisApp_Api;
+
 namespace APITesting
 {
     class Program
@@ -40,7 +42,7 @@ namespace APITesting
             }
             };
 
-            string body = "";
+            string body;
 
             using (var response = await client.SendAsync(request))
             {
@@ -48,16 +50,19 @@ namespace APITesting
                 body = await response.Content.ReadAsStringAsync();
             }
 
-            
-            string dateTime = DateTime.Now.ToString().Replace(":", "-").Replace("/","-");
-            string fileName = String.Format(@"S:\Test\{0} - Stock - {1}.txt", dateTime, symbol.ToUpper());
 
-            string formattedJson = helpers.FormatJson(body);
+            var jsonReponse = helpers.FormatJson(body).Symbol;
 
-            await File.WriteAllTextAsync(fileName, formattedJson);
+            Console.WriteLine("Symbol: " + jsonReponse);
+            Console.ReadLine();
+
+
+            //string dateTime = DateTime.Now.ToString().Replace(":", "-").Replace("/","-");
+            //string fileName = String.Format(@"S:\Test\{0} - Stock - {1}.txt", dateTime, symbol.ToUpper());
+
+            //await File.WriteAllTextAsync(fileName, formattedJson);
 
         }
-
         
     }
 }

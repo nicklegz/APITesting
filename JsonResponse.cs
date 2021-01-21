@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace APITesting
 {
-    public class StockData
+    public class JsonResponse
     {
         [JsonPropertyName("quote")]
         public JsonElement Quote { get; set; }

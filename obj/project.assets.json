@@ -519,9 +519,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\APITesting.csproj",
-      "projectName": "APITesting",
-      "projectPath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\APITesting.csproj",
+      "projectUniqueName": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\TechnicalAnalysisApp_Api.csproj",
+      "projectName": "TechnicalAnalysisApp_Api",
+      "projectPath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\TechnicalAnalysisApp_Api.csproj",
       "packagesPath": "C:\\Users\\L3GZ\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\obj\\",
       "projectStyle": "PackageReference",

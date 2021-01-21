@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Osoo+rTG3YewBkeRZL1NJhiK3rSZ//0HGhx8X+3IzoF2P4fvI3CbO32OK7j/s6OAXLoc/MKPinSsG2B7f+lSNw==",
+  "dgSpecHash": "AICarTuibimAzZ8ud4MQNb6WdtBDDofblPVqXKZ+zERptvUo+J8Y+ctQwvwHSr16JveELswh3o5Q+1oEdpb8Ug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\APITesting.csproj",
+  "projectFilePath": "C:\\Users\\L3GZ\\source\\repos\\APITesting\\APITesting\\TechnicalAnalysisApp_Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\L3GZ\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\L3GZ\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
