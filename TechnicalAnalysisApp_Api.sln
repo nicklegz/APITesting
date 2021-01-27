@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnicalAnalysisApp_Api", "TechnicalAnalysisApp_Api.csproj", "{06C9E97C-6B8F-46A2-88C5-999A8D660AEB}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TechnicalAnalysisApp_Db", "..\TechnicalAnalysisApp_Db\TechnicalAnalysisApp_Db.sqlproj", "{D1DA2CEF-30F8-4483-9E68-E66D41008E96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06C9E97C-6B8F-46A2-88C5-999A8D660AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C9E97C-6B8F-46A2-88C5-999A8D660AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C9E97C-6B8F-46A2-88C5-999A8D660AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C9E97C-6B8F-46A2-88C5-999A8D660AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DA2CEF-30F8-4483-9E68-E66D41008E96}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B61E0A72-1101-40A1-A6F1-9FE799E3DAF2}
+	EndGlobalSection
+EndGlobal

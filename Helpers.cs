@@ -9,31 +9,11 @@ namespace APITesting
     public class Helpers
     {
       
-        public string UriHelper(string fragment, List<string> filters, string path)
+        public string UriHelper(string fragment, string path)
         {
             UriBuilder uri = new UriBuilder(fragment);
             uri.Path = path;
             uri.Port = -1;
-
-            string concatQuery = "";
-
-            //build query substring based on List
-            if (filters.Count > 0)
-            {
-                foreach (string filter in filters)
-                {
-                    if (concatQuery == "")
-                    {
-                        concatQuery = filter;
-                    }
-                    else
-                    {
-                        concatQuery = concatQuery + '&' + filter;
-                    }
-                }
-
-                uri.Query = concatQuery;
-            }
 
             return uri.ToString();
         }

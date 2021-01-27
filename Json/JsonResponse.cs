@@ -9,13 +9,25 @@ namespace APITesting
     public class JsonRootResponse
     {
         [JsonPropertyName("quote")]
-        public StockDataModel Quote { get; set; }
+        public JsonBodyResponse Quote { get; set; }
     }
 
-    public class StockDataModel
+    public class JsonBodyResponse
     {
         [JsonPropertyName("symbol")]
         public string Symbol { get; set; }
+
+        [JsonPropertyName("companyName")]
+        public string CompanyName { get; set; }
+
+        [JsonPropertyName("sector")]
+        public string Industry { get; set; }
+
+        [JsonPropertyName("open")]
+        public decimal OpenPrice { get; set; }
+
+        [JsonPropertyName("delayedPrice")]
+        public decimal ClosePrice { get; set; }
 
         [JsonPropertyName("high")]
         public decimal HighPriceOfDay { get; set; }

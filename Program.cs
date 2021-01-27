@@ -1,73 +1,102 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Linq;
 using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using TechnicalAnalysisApp_Api.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using System.Linq;
+using TechnicalAnalysisApp_Api.Json;
 
 namespace APITesting
 {
+   
     class Program
     {
         static readonly HttpClient client = new HttpClient();
         static readonly Helpers helpers = new Helpers();
+        
         static async Task Main()
         {
             string apiHost = ConfigurationManager.AppSettings["apihost"];
             string apiKey = ConfigurationManager.AppSettings["apiKey"];
             string baseUrl = ConfigurationManager.AppSettings["baseurl"];
             string symbol = ConfigurationManager.AppSettings["stocksymbol"];
+            string pathParam = "";
 
-            string pathParam = String.Format("stock/{0}/book", symbol);
+            WatchlistJson watchlist = new WatchlistJson();
+            var watchlistEquities = watchlist.GetWatchlistJson();
 
-            //can add query parameters as needed
-            List<string> filter = new List<string>() /*{ "q=microsoft", "region=US" }*/;
-
-            string uri = helpers.UriHelper(baseUrl, filter, pathParam);
-
-            var request = new HttpRequestMessage
+            if (watchlistEquities != null)
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(uri),
-                Headers =
-            {
-                { "x-rapidapi-key", apiKey},
-                { "x-rapidapi-host", apiHost}
+                foreach (var item in watchlistEquities.Equities)
+                {
+                    pathParam = string.Format("stock/{0}/book", item.Equity);
+
+                    string uri = helpers.UriHelper(baseUrl, pathParam);
+
+                    var request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri(uri),
+                        Headers =
+                        {
+                            { "x-rapidapi-key", apiKey},
+                            { "x-rapidapi-host", apiHost}
+                        }
+                    };
+
+                    string body;
+                    using (var response = await client.SendAsync(request))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        body = await response.Content.ReadAsStringAsync();
+                    }
+
+                    var result = JsonSerializer.Deserialize<JsonRootResponse>(body);
+
+                    using (var context = new StockDataContext())
+                    {
+                        //if Equity already exists in database, only add row to Quote table
+                        var newEquityQuery = context.Equities.Where(e => e.CompanyName == result.Quote.CompanyName).FirstOrDefault<Equity>();
+
+                        if (newEquityQuery == null)
+                        {
+                            Equity equity = new Equity()
+                            {
+                                CompanyName = result.Quote.CompanyName,
+                                Industry = result.Quote.Industry,
+                                TickerId = result.Quote.Symbol
+                            };
+
+                            context.Equities.Add(equity);
+                        }
+
+                        Quote quote = new Quote()
+                        {
+                            TickerId = result.Quote.Symbol,
+                            OpenPrice = result.Quote.OpenPrice,
+                            ClosePrice = result.Quote.ClosePrice,
+                            HighPriceOfDay = result.Quote.HighPriceOfDay,
+                            LowPriceOfDay = result.Quote.LowPriceOfDay,
+                            AvgTotalVol = result.Quote.AvgTotalVol,
+                            Week52High = result.Quote.Week52High,
+                            Week52Low = result.Quote.Week52Low,
+                            Date = result.Quote.Date,
+                            YTDChange = result.Quote.YTDChange,
+                            QuoteId = Guid.NewGuid().ToString()
+                        };
+
+                        context.Quotes.Add(quote);
+                        context.SaveChanges();
+                    }
+                }
             }
-            };
-
-            string body;
-
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                body = await response.Content.ReadAsStringAsync();
-            }
-
-            var options = new JsonSerializerOptions()
-            {
-                WriteIndented = true
-            };
-
-            var result = JsonSerializer.Deserialize<JsonRootResponse>(body);
-
-            
-            Console.WriteLine("Symbol: " + result.Quote.Date);
-            Console.ReadLine();
-
-
-            //string dateTime = DateTime.Now.ToString().Replace(":", "-").Replace("/","-");
-            //string fileName = String.Format(@"S:\Test\{0} - Stock - {1}.txt", dateTime, symbol.ToUpper());
-
-            //await File.WriteAllTextAsync(fileName, formattedJson);
-
         }
-        
     }
 }
 
