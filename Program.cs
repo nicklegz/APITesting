@@ -76,22 +76,28 @@ namespace APITesting
                             context.Equities.Add(equity);
                         }
 
-                        Quote quote = new Quote()
-                        {
-                            TickerId = result.Quote.Symbol,
-                            OpenPrice = result.Quote.OpenPrice,
-                            ClosePrice = result.Quote.ClosePrice,
-                            HighPriceOfDay = result.Quote.HighPriceOfDay,
-                            LowPriceOfDay = result.Quote.LowPriceOfDay,
-                            AvgTotalVol = result.Quote.AvgTotalVol,
-                            Week52High = result.Quote.Week52High,
-                            Week52Low = result.Quote.Week52Low,
-                            Date = result.Quote.Date,
-                            YTDChange = result.Quote.YTDChange,
-                            QuoteId = Guid.NewGuid().ToString()
-                        };
+                        var newQuoteQuery = context.Quotes.Where(q => q.TickerId == result.Quote.Symbol && q.Date == result.Quote.Date).FirstOrDefault<Quote>();
 
-                        context.Quotes.Add(quote);
+                        if (newQuoteQuery == null)
+                        {
+                            Quote quote = new Quote()
+                            {
+                                TickerId = result.Quote.Symbol,
+                                OpenPrice = result.Quote.OpenPrice,
+                                ClosePrice = result.Quote.ClosePrice,
+                                HighPriceOfDay = result.Quote.HighPriceOfDay,
+                                LowPriceOfDay = result.Quote.LowPriceOfDay,
+                                AvgTotalVol = result.Quote.AvgTotalVol,
+                                Week52High = result.Quote.Week52High,
+                                Week52Low = result.Quote.Week52Low,
+                                Date = result.Quote.Date,
+                                YTDChange = result.Quote.YTDChange,
+                                QuoteId = Guid.NewGuid().ToString()
+                            };
+
+                            context.Quotes.Add(quote);
+                        }
+
                         context.SaveChanges();
                     }
                 }
